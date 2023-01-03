@@ -14,9 +14,9 @@ resource "helm_release" "calico" {
   }
 }
 
-############
-## Demo   ##
-############
+#####################
+## Network_policy   ##
+#####################
 resource "kubernetes_namespace" "calico" {
 
   metadata {
@@ -39,5 +39,54 @@ resource "kubernetes_network_policy" "calico_default_deny" {
     pod_selector {
     }
     policy_types = ["Ingress", "Egress"]
+  }
+}
+
+###############
+# Deployment  #
+###############
+resource "kubernetes_deployment" "nginx" {
+  metadata {
+    name = "MyDemoApp"
+    labels = {
+      test = "MyDemoApp"
+    }
+    namespace = kubernetes_namespace.calico.name
+  }
+
+  spec {
+    replicas = 2
+
+    selector {
+      match_labels = {
+        test = "MyDemoApp"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          test = "MyDemoApp"
+        }
+      }
+
+      spec {
+        container {
+          image = "nginx:latest"
+          name  = "MyDemoApp"
+
+          resources {
+            limits = {
+              cpu    = "0.5"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "250m"
+              memory = "50Mi"
+            }
+          }
+        }
+      }
+    }
   }
 }
