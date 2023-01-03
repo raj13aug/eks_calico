@@ -11,7 +11,7 @@ provider "kubernetes" {
 ############
 ## Calico ##
 ############
-resource "helm_release" "calico" {
+/* resource "helm_release" "calico" {
   name             = "calico"
   repository       = "https://projectcalico.docs.tigera.io/charts"
   chart            = "tigera-operator"
@@ -22,7 +22,7 @@ resource "helm_release" "calico" {
     name  = "kubernetesProvider"
     value = "EKS"
   }
-}
+} */
 
 #####################
 ## Network_policy   ##
