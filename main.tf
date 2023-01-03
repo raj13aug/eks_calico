@@ -42,7 +42,7 @@ resource "kubernetes_network_policy" "calico_default_deny" {
 
   metadata {
     name      = "deny-all"
-    namespace = kubernetes_namespace.calico.name
+    namespace = kubernetes_namespace.calico.metadata.0.name
   }
 
   spec {
@@ -60,7 +60,7 @@ resource "kubernetes_deployment" "nginx" {
     labels = {
       test = "MyDemoApp"
     }
-    namespace = kubernetes_namespace.calico.name
+    namespace = kubernetes_namespace.calico.metadata.0.name
   }
 
   spec {
