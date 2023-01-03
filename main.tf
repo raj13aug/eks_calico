@@ -56,7 +56,7 @@ resource "kubernetes_network_policy" "calico_default_deny" {
 ###############
 resource "kubernetes_deployment" "nginx" {
   metadata {
-    name = "MyDemoApp"
+    name = "nginx"
     labels = {
       test = "MyDemoApp"
     }
