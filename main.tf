@@ -38,7 +38,7 @@ resource "kubernetes_namespace" "calico" {
   }
 }
 
-resource "kubernetes_network_policy" "calico_default_deny" {
+/* resource "kubernetes_network_policy" "calico_default_deny" {
 
   metadata {
     name      = "deny-all"
@@ -49,7 +49,7 @@ resource "kubernetes_network_policy" "calico_default_deny" {
     pod_selector {}
     policy_types = ["Ingress", "Egress"]
   }
-}
+} */
 
 ###############
 # Deployment  #
