@@ -84,6 +84,10 @@ resource "kubernetes_deployment" "nginx" {
           image = "nginx:latest"
           name  = "mydemoapp"
 
+          port {
+            container_port = 80
+          }
+
           resources {
             limits = {
               cpu    = "0.5"
