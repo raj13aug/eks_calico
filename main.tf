@@ -56,9 +56,9 @@ resource "kubernetes_network_policy" "calico_default_deny" {
 ###############
 resource "kubernetes_deployment" "nginx" {
   metadata {
-    name = "nginx"
+    name = "mydemoapp"
     labels = {
-      test = "MyDemoApp"
+      test = "mydemoapp"
     }
     namespace = kubernetes_namespace.calico.metadata.0.name
   }
@@ -68,21 +68,21 @@ resource "kubernetes_deployment" "nginx" {
 
     selector {
       match_labels = {
-        test = "MyDemoApp"
+        test = "mydemoapp"
       }
     }
 
     template {
       metadata {
         labels = {
-          test = "MyDemoApp"
+          test = "mydemoapp"
         }
       }
 
       spec {
         container {
           image = "nginx:latest"
-          name  = "MyDemoApp"
+          name  = "mydemoapp"
 
           resources {
             limits = {
