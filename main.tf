@@ -31,13 +31,12 @@ resource "kubernetes_namespace" "calico" {
 resource "kubernetes_network_policy" "calico_default_deny" {
 
   metadata {
-    name      = "default-deny"
+    name      = "deny-all"
     namespace = kubernetes_namespace.calico.name
   }
 
   spec {
-    pod_selector {
-    }
+    pod_selector {}
     policy_types = ["Ingress", "Egress"]
   }
 }
