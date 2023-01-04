@@ -11,7 +11,7 @@ provider "kubernetes" {
 ############
 ## Calico ##
 ############
-/* resource "helm_release" "calico" {
+resource "helm_release" "calico" {
   name             = "calico"
   repository       = "https://projectcalico.docs.tigera.io/charts"
   chart            = "tigera-operator"
@@ -22,7 +22,7 @@ provider "kubernetes" {
     name  = "kubernetesProvider"
     value = "EKS"
   }
-} */
+}
 
 #####################
 ## Network_policy   ##
@@ -38,7 +38,7 @@ resource "kubernetes_namespace" "calico" {
   }
 }
 
-/* resource "kubernetes_network_policy" "calico_default_deny" {
+resource "kubernetes_network_policy" "calico_default_deny" {
 
   metadata {
     name      = "deny-all"
@@ -49,7 +49,7 @@ resource "kubernetes_namespace" "calico" {
     pod_selector {}
     policy_types = ["Ingress", "Egress"]
   }
-} */
+}
 
 ###############
 # Deployment  #
