@@ -25,7 +25,7 @@ resource "helm_release" "calico" {
 }
 
 #####################
-## Network_policy   ##
+## Namespace       ##
 #####################
 resource "kubernetes_namespace" "calico" {
 
@@ -37,6 +37,10 @@ resource "kubernetes_namespace" "calico" {
     name = "demo"
   }
 }
+
+#####################
+## Network_policy   ##
+#####################
 
 resource "kubernetes_network_policy" "calico_default_deny" {
 
@@ -54,6 +58,7 @@ resource "kubernetes_network_policy" "calico_default_deny" {
 ###############
 # Deployment  #
 ###############
+
 resource "kubernetes_deployment" "nginx" {
   metadata {
     name = "mydemoapp"
@@ -103,6 +108,10 @@ resource "kubernetes_deployment" "nginx" {
     }
   }
 }
+
+############
+# Services #
+############
 
 resource "kubernetes_service" "nginx" {
   metadata {
